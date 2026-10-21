@@ -1,0 +1,24 @@
+flows:
+    transferir\_monto:
+        description: Flujo para realizar transferencias de dinero entre usuarios.
+        steps:
+            - collect: destinatario
+            - collect: monto
+              description: Cantidad de dólares a transferir
+            - action: action\_check\_sufficient\_funds
+              next:
+                - if: not slots.has\_sufficient\_funds
+                  then:
+                    - action: utter\_insufficient\_funds
+                      next: END
+                - else: confirmacion
+            - collect: final\_confirmation
+              id: confirmacion
+              next:
+                - if: not slots.final\_confirmation
+                  then:
+                  - action: utter\_transfer\_cancelled
+                    next: END
+                - else: exito
+                - action: utter\_transfer\_complete
+                  id: exito

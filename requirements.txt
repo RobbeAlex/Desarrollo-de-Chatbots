@@ -1,0 +1,10 @@
+flask
+openai
+qdrant-client
+langchain
+langchain-core
+langchain-community
+langchain-ollama
+langgraph
+pydantic
+python-dotenv
